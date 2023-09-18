@@ -1,29 +1,39 @@
 #include "main.h"
 
 /**
- * puts2 - Prints every other character from a string, starting with the first.
+ * puts_half - Prints the second half of a string.
  *
- * This function takes a pointer to a string 'str' and prints every other
- * character from the string, starting with the first character. It then
- * prints a new line character to stdout.
+ * This function takes a pointer to a string 'str' and prints the second half
+ * of the string. If the length of the string is odd, it prints the second half
+ * starting from the middle character.
  *
  * @str: Input string.
  */
-void puts2(char *str)
+void puts_half(char *str)
 {
-	int length = 0;
+    int length = 0;
 
-	/* Calculate the length of the string */
-	while (str[length] != '\0')
-	{
-		length++;
-	}
+    /* Calculate the length of the string */
+    while (str[length] != '\0')
+    {
+        length++;
+    }
 
-	/* Print every other character starting from the first character */
-	for (int i = 0; i < length; i += 2)
-	{
-		_putchar(str[i]);
-	}
+    int start = length / 2;
 
-	_putchar('\n');
+    /* Adjust start position for odd-length strings */
+    if (length % 2 == 1)
+    {
+        start = (length - 1) / 2;
+    }
+
+    int i;  // Declare the loop counter variable here
+
+    /* Print the second half of the string */
+    for (i = start; str[i] != '\0'; i++)
+    {
+        _putchar(str[i]);
+    }
+
+    _putchar('\n');
 }
