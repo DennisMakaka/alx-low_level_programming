@@ -11,9 +11,9 @@
  */
 void puts_half(char *str)
 {
-	int length = 0;
-	int start;
-	int i;
+	int length = 0;  /* Variable to store the length of the string */
+	int start;       /* Variable to store the starting position for printing */
+	int i;           /* Loop counter */
 
 	/* Calculate the length of the string */
 	while (str[length] != '\0')
@@ -21,12 +21,13 @@ void puts_half(char *str)
 		length++;
 	}
 
+	/* Calculate the starting position for printing */
 	start = length / 2;
 
-	/* Adjust start position for odd-length strings */
+	/* Adjust the start position for odd-length strings */
 	if (length % 2 == 1)
 	{
-		start = (length - 1) / 2;
+		start = (length + 1) / 2;
 	}
 
 	/* Print the second half of the string */
@@ -35,5 +36,6 @@ void puts_half(char *str)
 		_putchar(str[i]);
 	}
 
+	/* Print a newline character at the end */
 	_putchar('\n');
 }
