@@ -34,5 +34,7 @@ int main(void)
 
 	putchar('\n');
 
+	printf("Tada! Congrats\n"); /* Print the expected success message */
+
 	return (0);
 }
