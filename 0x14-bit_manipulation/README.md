@@ -1,0 +1,1 @@
+This project focuses on bit manipulation in C programming. It provides a set of functions to perform various bit-level operations, such as converting binary to an unsigned integer, setting or clearing individual bits, flipping bits and determining the endianness of the system.
