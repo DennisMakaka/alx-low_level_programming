@@ -1,0 +1,1 @@
+This project is designed to provide basic functionality for working with files in C. It majorly includes 3 main functions: Read_textfile, create_file, append_text_to_file. the project is implemented in C and utilizes standard I/O and file management functions available in the C standard library.
