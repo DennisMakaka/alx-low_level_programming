@@ -31,60 +31,53 @@ typedef struct hash_table_s
 } hash_table_t;
 
 /**
- * hash_table_create - Createees a hash table
- * @size: The size of te array
+ * struct shash_node - Node of a sorted hash table
  *
- * Return: A pointer to the newly created hash table, or NULL if something 
- * went wrong.
+ * @key: The key, string
+ * The key is unique in the sorted hash table
+ * @value: The value corresponding to a key
+ * @next: A pointer to the next node in the sorted order
+ * @sprev: A pointer to the previous node in the sorted order
+ * @snext: A pointer to the next node in the sorted order
  */
-hash_table_t *hash_table_create(unsigned long int size);
+typedef struct shash_node
+{
+    char *key;
+    char *value;
+    struct shash_node *next;
+    struct shash_node *sprev;
+    struct shash_node *snext;
+} shash_node_t;
 
 /**
- * hash_djb2 - Hash function implementing the dj2 algorith
- * @str: The string to hash
+ * struct shash_table - Sorted hash table data structure
  *
- * Return: The computed hash value
- */
-unsigned long int hash_djb2(const unsigned char *str);
-
-/**
- * key_index - gets the index of a key in the hash table's array
- * @key: The key to find the index for
  * @size: The size of the array
- *
- * Return: The index where the key should be storedd in the array
+ * @array: An array of size @size
+ * Each cell of this array is a pointer to the first node of a linked list,
+ * because we want our Sorted HashTable to use a Chaining collision handling
+ * @shead: A pointer to the head of the sorted linked list
+ * @stail: A pointer to the tail of the sorted linked list
  */
+typedef struct shash_table
+{
+    unsigned long int size;
+    shash_node_t **array;
+    shash_node_t *shead;
+    shash_node_t *stail;
+} shash_table_t;
+
+/* Existing function prototypes for regular hash table */
+
+/* Function prototypes for sorted hash table */
+shash_table_t *shash_table_create(unsigned long int size);
+int shash_table_set(shash_table_t *ht, const char *key, const char *value);
+char *shash_table_get(const shash_table_t *ht, const char *key);
+void shash_table_print(const shash_table_t *ht);
+void shash_table_print_rev(const shash_table_t *ht);
+void shash_table_delete(shash_table_t *ht);
+unsigned long int hash_djb2(const unsigned char *str);
 unsigned long int key_index(const unsigned char *key, unsigned long int size);
 
-/**
- * hash_table_set -  Adds or updates a key/value pair in the hash table
- * @ht: The hash table to add or update the key/value to
- * @key: The key. Cannot be an empty string.
- * @value: The value associated with the key. Must be duplicated.
- *
- * Return: 1 if successful, 0 otherwise
- */
-int hash_table_set(hash_table_t *ht, const char *key, const char *value);
-
-/**
- * hash_table_get - Retrieves the value associated with a key in the hash table
- * @ht: The hash table to look into
- * @key: The key you are looking for
- *
- * Return: The value associated with the key, or NULL if key is not found
- */
-char *hash_table_get(const hash_table_t *ht, const char *key);
-
-/**
- * hash_table_print - Prints the contents of the hash table
- * @ht: The hash table to print
- */
-void hash_table_print(const hash_table_t *ht);
-
-/**
- * hash_table_delete - Deletes a hash table and its elements
- * @ht: The hash table to delete
- */
-void hash_table_delete(hash_table_t *ht);
 
 #endif /* HASH_TABLES_H */
